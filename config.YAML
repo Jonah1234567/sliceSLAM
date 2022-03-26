@@ -1,0 +1,14 @@
+# data input"
+  video_path: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\input\\sample.mp4"
+  motion_data_path: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\input\\sample_motion.csv"
+  fps: 24
+  v_res: 1080
+  h_res: 1920
+  encoder: h264
+
+# output
+  output_folder: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output"
+  frame_name: 'out%04d.png'
+
+# internal script paths:
+  merge: 'python C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data_merge\\merge.py'
