@@ -18,7 +18,6 @@ combined_data = motion_data
 combined_data["frame_path"] = ""
 i = 0
 for f in os.listdir(cfg.get("image_output_folder")):
-    print(f)
     combined_data.at[i, "frame_path"] = os.path.join(cfg.get("image_output_folder"), f)
     i += 1
 
