@@ -17,8 +17,9 @@ time_counter = 0
 combined_data = motion_data
 combined_data["frame_path"] = ""
 i = 0
-for f in os.listdir(cfg.get("output_folder")):
-    combined_data.at[i, "frame_path"] = os.path.join(cfg.get("output_folder", f))
+for f in os.listdir(cfg.get("image_output_folder")):
+    print(f)
+    combined_data.at[i, "frame_path"] = os.path.join(cfg.get("image_output_folder"), f)
     i += 1
 
 combined_data = combined_data.loc[combined_data["frame_path"] != ""]
@@ -26,4 +27,4 @@ combined_data = combined_data.loc[combined_data["frame_path"] != ""]
 if len(motion_data) != len(combined_data):
     print("Warning, some data may have been cutout due to mismatched dimensions between frame and motion data")
 
-combined_data.to_csv(cfg.get("combined_data_output_path"))
+combined_data.to_csv(cfg.get("combined_data_path"))

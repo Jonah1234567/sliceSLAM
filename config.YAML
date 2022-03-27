@@ -9,8 +9,14 @@
 # output
   output_folder: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output"
   image_output_folder: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\images"
-  combined_data_output_path: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\combined_data.csv"
+  combined_data_path: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\combined_data.csv"
   frame_name: 'out%04d.png'
 
 # internal script paths:
   merge: 'python C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data_merge\\merge.py'
+
+# camera:
+  width: 1920
+  height: 1080
+  theta: 70
+  phi: 50
