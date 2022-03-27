@@ -9,10 +9,11 @@ with open('C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM
 frames = data.get("video_path")
 fps = str(data.get("fps"))
 output_folder = data.get("output_folder")
-output = os.path.join(output_folder, data.get("frame_name"))
+image_output_folder = data.get("image_output_folder")
+output = os.path.join(image_output_folder, data.get("frame_name"))
 
-for f in os.listdir(output_folder):
-    os.remove(os.path.join(output_folder, f))
+for f in os.listdir(image_output_folder):
+    os.remove(os.path.join(image_output_folder, f))
 
 os.system('ffmpeg -i ' + frames + ' -vf fps=' + fps + ' ' + output)
 os.system(data.get("merge"))

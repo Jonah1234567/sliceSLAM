@@ -8,6 +8,8 @@
 
 # output
   output_folder: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output"
+  image_output_folder: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\images"
+  combined_data_output_path: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\combined_data.csv"
   frame_name: 'out%04d.png'
 
 # internal script paths:
