@@ -19,6 +19,7 @@ for i in range(50,51):
 
     image_A_Data = np.asarray(image_A, dtype="float32") # maybe do ints instead?
     image_B_Data = np.asarray(image_B, dtype="float32")
+    print(np.shape(image_A_Data))
     diff = image_A_Data - image_B_Data  # elementwise for np array
     m_norm = sum(sum(abs(diff)))  # Manhattan norm
 
