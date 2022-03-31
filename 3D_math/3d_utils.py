@@ -1,36 +1,40 @@
 import numpy as np
+from numpy import array, cross
+from numpy.linalg import solve, norm
 
 
-def calculate_pixel_location_3d(camera1, camera2, pixel1, pixel2, im_length, im_width, im_theta, im_phi):
-    x2, y2, z2, theta2, phi2 = camera2
-    pixel1_x, pixel1_y = pixel1
-    pixel2_x, pixel2_y = pixel2
+# variable rename this stuff, your naming scheme is just going to confuse you
+def angular_to_threespace_line(x_start, y_start, z_start, theta_rotation, phi_rotation, degrees):
+    if degrees:
+        theta_rotation, phi_rotation = np.radians(theta_rotation), np.radians(phi_rotation)
+    return x_start, y_start, z_start, np.cos(phi_rotation) * np.cos(theta_rotation), np.cos(phi_rotation) * np.cos(
+        theta_rotation), np.sin(phi_rotation)
 
 
-def create_3d_line(camera, pixel, im_length, im_width, im_theta, im_phi):
-    line_x, line_y, line_z, camera_theta, camera_phi = camera
-    pixel_x, pixel_y = pixel
-    # theta slope corresponds to the x and y plane
-    # phi slope corresponds to the x and z plane
-    line_theta_slope = np.tan(np.radians(camera_theta + pixel_x/im_length*im_theta))
-    line_phi_slope = np.tan(np.radians(camera_phi + pixel_y/im_width*im_phi))
-    return line_x, line_y, line_z, line_theta_slope, line_phi_slope
+def threespace_to_multipoint_line(x_s, y_s, z_s, x_scale, y_scale, z_scale, length):
+    t = length / (x_scale ** 2 + y_scale ** 2 + z_scale ** 2)
+    p1 = (x_s, y_s, z_s)
+    p2 = (x_s + x_scale * t, y_s + y_scale * t, z_s + z_scale * t)
+    return p1, p2
 
 
-def intersection_point(line1, line2, threshold):
-    line_x1, line_y1, line_z1, line_theta_slope1, line_phi_slope1 = line1
-    line_x2, line_y2, line_z2, line_theta_slope2, line_phi_slope2 = line2
+def find_poi(line_A_P1, line_A_P2, line_B_P1, line_B_P2):
 
-    continue_condition, i = True, 0
+    # compute unit vectors of directions of lines A and B
+    UA = (line_A_P2 - line_A_P1) / norm(line_A_P2 - line_A_P1)
+    UB = (line_B_P2 - line_B_P1) / norm(line_B_P2 - line_B_P1)
+    # find unit direction vector for line C, which is perpendicular to lines A and B
+    UC = cross(UB, UA);
+    UC /= norm(UC)
 
-    while continue_condition:
-        point_1 = line_x1 +
-        i += 1
-    # not doing exact intersection point because odds are the lines will not perfectly intersect
-
-
-
-
-
+    # solve the system derived in user2255770's answer from StackExchange: https://math.stackexchange.com/q/1993990
+    RHS = line_B_P1 - line_A_P1
+    LHS = array([UA, -UB, UC]).T
+    print(solve(LHS, RHS))
 
 
+p1 = np.array([0, 0, 0])
+p2 = np.array([10, 10, 10])
+p3 = np.array([0, 5, 0])
+p4 = np.array([10, 5, 10])
+find_poi(p1, p2, p3, p4)
