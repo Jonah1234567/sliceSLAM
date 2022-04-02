@@ -11,6 +11,7 @@
   image_output_folder: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\images"
   combined_data_path: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\combined_data.csv"
   frame_name: 'out%04d.png'
+  environment_data: "C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data\\output\\environment_points.csv"
 
 # internal script paths:
   merge: 'python C:\\Users\\jonah\\Desktop\\Projects\\Programming\\Personal\\sliceSLAM\\data_merge\\merge.py'
@@ -19,4 +20,4 @@
   width: 1920
   height: 1080
   theta: 70
-  phi: 50
+  phi: 45
