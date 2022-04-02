@@ -30,12 +30,18 @@ def plot(line, scatter, x, y, z, x2=np.array(0), y2=np.array(0), z2=np.array(0),
         ax.scatter3D(x, y, z, cmap='Greens')
         if drone_path:
             ax.scatter3D(x2, y2, z2, cmap='Blue')
+        ax.set_xlabel('X axis')
+        ax.set_ylabel('Y axis')
+        ax.set_zlabel('Z axis')
         plt.show()
 
     if line:
         ax.plot3D(x, y, z, 'gray')
         if drone_path:
             ax.plot3D(x2, y2, z2, 'blue')
+        ax.set_xlabel('X axis')
+        ax.set_ylabel('Y axis')
+        ax.set_zlabel('Z axis')
         plt.show()
 
 

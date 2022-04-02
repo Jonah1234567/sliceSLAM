@@ -32,11 +32,13 @@ combined_data = pd.read_csv(cfg.get("combined_data_path"))
 #
 # combined_data.to_csv(cfg.get("combined_data_path"))
 
-#  for i in range(len(combined_data) - 1):
-camera = 1080, 1920, 70, 45
-good_points = []
-print(good_points)
-for i in range(50, 51):
+
+camera = 720, 1280, 72, 40.5
+good_points = np.zeros((1, 3))
+np.savetxt(cfg.get("environment_data"), good_points, delimiter=",")
+
+for i in range(len(combined_data) - 1):
+    print("frame ", i)
     img1 = cv.imread(combined_data.loc[i, "frame_path"], cv.IMREAD_GRAYSCALE)  # queryImage
     img2 = cv.imread(combined_data.loc[i + 1, "frame_path"], cv.IMREAD_GRAYSCALE)  # trainImage
     # Initiate ORB detector
@@ -52,8 +54,9 @@ for i in range(50, 51):
 
     # Sort them in the order of their distance.
     matches = sorted(matches, key=lambda x: x.distance)
-
+    good_points_1 = np.zeros((1, 3))
     for match in matches:
+
         p1 = kp1[match.queryIdx].pt
         p2 = kp2[match.trainIdx].pt
         point1 = int(round(p1[0])), int(round(p1[1]))
@@ -63,10 +66,11 @@ for i in range(50, 51):
               combined_data.loc[i, "Theta_Rot"], combined_data.loc[i, "Phi_Rot"]
         sp2 = combined_data.loc[i + 1, "X_Pos"], combined_data.loc[i + 1, "Y_Pos"], combined_data.loc[i + 1, "Z_Pos"], \
               combined_data.loc[i + 1, "Theta_Rot"], combined_data.loc[i + 1, "Phi_Rot"]
-        good_points.append(find_intersection(camera, sp1, sp2, point1, point2))
-
-good_points = np.array(good_points)
-
+        dist, data = find_intersection(camera, sp1, sp2, point1, point2)
+        arr = np.zeros((1, 3))
+        arr[0:3] = data[0], data[1], data[2]
+        good_points_1 = np.append(good_points_1, arr, axis=0)
+    good_points = np.append(good_points, good_points_1, axis=0)
 np.savetxt(cfg.get("environment_data"), good_points, delimiter=",")
 
 plot_drone(False, True)

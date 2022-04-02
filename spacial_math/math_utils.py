@@ -60,7 +60,6 @@ def find_distance_and_point(A, B, C):
 
     tangent = normalize(np.cross(np.cross(A-B, C-B), C-B))
     point = A + tangent/2*distance
-    print(point)
     return distance, point
 
 
@@ -80,7 +79,6 @@ def find_poi(line_A_P1, line_A_P2, line_B_P1, line_B_P2, length, step_size=0.01,
 
         records[i] = dist
         points_records[i] = mid_point
-    print(points_records)
     return records[np.argmin(records)], points_records[np.argmin(records)]
 
 
@@ -93,11 +91,3 @@ def find_intersection(camera, start_pos1, start_pos2, pixel_loc1, pixel_loc2, de
                                       start_pos2[2], start_pos2[3], start_pos2[4], pixel_loc2[0], pixel_loc2[1],
                                       degrees, length)
     return find_poi(p1, p2, p3, p4, length, step_size, threshold)
-
-
-cam = np.array((1080, 1920, 70, 45))
-sp_1 = np.array((0, 0, 0, 0, 0))
-pl1 = np.array((0, 0))
-sp_2 = np.array((1, 1, 0, 0, 0))
-pl2 = np.array((500, 0))
-print(find_intersection(cam, sp_1, sp_2, pl1, pl2))
